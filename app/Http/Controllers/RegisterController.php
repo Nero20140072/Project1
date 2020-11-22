@@ -16,7 +16,7 @@ class RegisterController extends Controller
         ));
 
         return response()->json([
-            'message' => 'You were successfully registered. Use your email and password to sign in.'
+            'message' => 'Registration Done! Use your email and password to sign in.'
         ], 200);
     }
 }
