@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class TaskModel extends Model
 {
     protected $table = "tasks";
-    public $timestamps = false;
 
     protected $fillable = [
         'list_id',

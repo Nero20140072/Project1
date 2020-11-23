@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ListModel extends Model
 {
     protected $table = "lists";
-    public $timestamps = false;
 
     protected $fillable = [
         'name',

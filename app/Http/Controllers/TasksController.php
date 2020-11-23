@@ -13,14 +13,15 @@ class TasksController extends Controller
 //Поиск задачи по ID:
     public function taskByID($id)
     {
-        $Task=TaskModel::find($id);
-        if (is_null($Task)){
+        $task = TaskModel::find($id);
+        if (is_null($task))
+        {
             return response()->json([
                 'error' => true,
                 'message' => 'Task does not exist'
             ], 404);
         }
-        return response()->json($Task, 200);
+        return response()->json($task, 200);
     }
 
 //Создание задачи:
@@ -35,8 +36,8 @@ class TasksController extends Controller
             return response()->json([$validator->errors()], 400);
         }
 
-        $Task = TaskModel::create($req->all());
-        return response()->json($Task, 201);
+        $task = TaskModel::create($req->all());
+        return response()->json($task, 201);
     }
 
 //Редактирование задачи:
@@ -47,44 +48,48 @@ class TasksController extends Controller
             'mark' => 'required|min:4',
         ];
         $validator = Validator::make($req->all(),$rules);
-        if ($validator->fails()){
+        if ($validator->fails())
+        {
             return response()->json([$validator->errors()],400);
         }
 
-        $Task=TaskModel::find($id);
-        if (is_null($Task)){
+        $task = TaskModel::find($id);
+        if (is_null($task))
+        {
             return response()->json([
-                'error'=>true,
-                'message'=>'Task not found'
+                'error' => true,
+                'message' => 'Task not found'
             ], 404);
         }
-        $Task->update($req->all());
-        return response()->json($Task, 200);
+        $task->update($req->all());
+        return response()->json($task, 200);
     }
 
     //Удаление задачи по ID:
     public function taskDelete(Request $req, $id){
-        $Task=TaskModel::find($id);
-        if (is_null($Task)){
+        $task = TaskModel::find($id);
+        if (is_null($task))
+        {
             return response()->json([
-                'error'=>true,
-                'message'=>'Task not found'
+                'error' => true,
+                'message' => 'Task not found'
             ], 404);
         }
-        $Task->delete();
+        $task->delete();
         return response()->json('', 200);
     }
 
     //Проставление метки о выполненном задании
     public function mark(Request $req, $id){
-        $Task=TaskModel::find($id);
-        if ($Task->mark=='true'){
-            $Task->mark='false';
-        }
-        else {
-            $Task->mark='true';
-        }
-        $Task->save();
+        $task = TaskModel::find($id);
+        if ($task->mark == 'true')
+        {
+            $task->mark = 'false';
+        } else
+            {
+            $task->mark = 'true';
+            }
+        $task->save();
     }
 }
 
